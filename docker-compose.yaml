@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=todos_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./volumes/mysql_data:/var/lib/mysql
+    networks:
+      - mysql_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    depends_on:
+      - mysqldb
+    environment:
+      - PMA_HOST=mysqldb
+      - PMA_PORT=3306
+      - PMA_ARBITRARY=1
+    ports:
+      - 8081:80
+    networks:
+      - mysql_network
+volumes:
+  mysql_data:
+networks:
+  mysql_network:
