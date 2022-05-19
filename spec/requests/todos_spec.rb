@@ -121,7 +121,7 @@ RSpec.describe "Todos API", type: :request do
   describe "DELETE /api/v1/todos/id" do
     
     context "when the record doesn't exist" do
-      let(:todo_id) {100}
+      let(:todo_id) {todos.last.id+1}
       before {delete "/api/v1/todos/#{todo_id}"}
   
       it "returns status code 404" do
