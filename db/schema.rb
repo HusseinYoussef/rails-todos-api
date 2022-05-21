@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_16_171623) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_20_010941) do
   create_table "items", charset: "latin1", force: :cascade do |t|
     t.string "name"
     t.boolean "done"
@@ -25,6 +25,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_16_171623) do
     t.string "created_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "items_count", default: 0
+    t.string "token"
   end
 
   add_foreign_key "items", "todos"
